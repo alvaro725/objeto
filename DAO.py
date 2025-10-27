@@ -24,7 +24,6 @@ class DAO:
         if self.conn:
             self.conn.close()
 
-    # 🔹 EMPLEADOS CRUD
     def insertar_empleado(self, empleado):
         self.conectar()
         sql = """INSERT INTO empleado (nombre, direccion, telefono, email, fecha_inicio, salario, id_departamento)
@@ -49,7 +48,6 @@ class DAO:
         self.conn.commit()
         self.desconectar()
 
-    # 🔹 DEPARTAMENTOS CRUD
     def insertar_departamento(self, departamento):
         self.conectar()
         sql = "INSERT INTO departamento (nombre, gerente) VALUES (%s, %s)"

@@ -87,9 +87,9 @@ def menu():
         elif opcion == "6":
             mostrar_proyectos()
         elif opcion == "7":
-            print("👋 Saliendo del sistema...")
+            print("Saliendo del sistema...")
             break
         else:
-            print("❌ Opción inválida")
+            print("Opción inválida")
 
 menu()

@@ -1,4 +1,3 @@
-# conexion.py
 import mysql.connector
 from mysql.connector import Error
 from key import key
@@ -13,9 +12,9 @@ class Conexion:
                 database=key["db"]
             )
             self.cursor = self.conexion.cursor()
-            print("✅ Conexión establecida correctamente")
+            print("Conexión establecida correctamente")
         except Error as err:
-            print(f"❌ Error al conectar a la base de datos: {err}")
+            print(f"Error al conectar a la base de datos: {err}")
 
     def ejecutar_consulta(self, consulta, params=None):
         try:
@@ -37,4 +36,4 @@ class Conexion:
     def cerrar(self):
         if self.cursor: self.cursor.close()
         if self.conexion: self.conexion.close()
-        print("🔒 Conexión cerrada")
+        print("Conexión cerrada")
