@@ -1,4 +1,3 @@
-# DAO.py
 import mysql.connector
 from key import key
 from Empleado import Empleado
