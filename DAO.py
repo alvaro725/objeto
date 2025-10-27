@@ -1,5 +1,9 @@
+# DAO.py
 import mysql.connector
 from key import key
+from Empleado import Empleado
+from Departamento import Departamento
+from Proyecto import Proyecto
 
 class DAO:
     def __init__(self):
@@ -21,27 +25,18 @@ class DAO:
         if self.conn:
             self.conn.close()
 
-    # Insertar empleado (ID se asigna automáticamente en la base de datos)
+    # 🔹 EMPLEADOS CRUD
     def insertar_empleado(self, empleado):
         self.conectar()
-        sql = """
-        INSERT INTO empleado (nombre, direccion, telefono, email, fecha_inicio, salario, id_departamento)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """
-        datos = (
-            empleado.nombre,
-            empleado.direccion,
-            empleado.telefono,
-            empleado.email,
-            empleado.fecha_inicio,
-            empleado.salario,
-            empleado.id_departamento
-        )
+        sql = """INSERT INTO empleado (nombre, direccion, telefono, email, fecha_inicio, salario, id_departamento)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+        datos = (empleado.get_nombre(), empleado.get_direccion(), empleado.get_telefono(),
+                 empleado.get_email(), empleado.get_fecha_inicio(), empleado.get_salario(),
+                 empleado.get_id_departamento())
         self.cursor.execute(sql, datos)
         self.conn.commit()
         self.desconectar()
 
-    # Obtener todos los empleados
     def obtener_empleados(self):
         self.conectar()
         self.cursor.execute("SELECT * FROM empleado")
@@ -49,16 +44,21 @@ class DAO:
         self.desconectar()
         return resultados
 
-    # Insertar departamento (ID automático)
+    def eliminar_empleado(self, id_empleado):
+        self.conectar()
+        self.cursor.execute("DELETE FROM empleado WHERE idempleado = %s", (id_empleado,))
+        self.conn.commit()
+        self.desconectar()
+
+    # 🔹 DEPARTAMENTOS CRUD
     def insertar_departamento(self, departamento):
         self.conectar()
         sql = "INSERT INTO departamento (nombre, gerente) VALUES (%s, %s)"
-        datos = (departamento.nombre, departamento.gerente)
+        datos = (departamento.get_nombre(), departamento.get_gerente())
         self.cursor.execute(sql, datos)
         self.conn.commit()
         self.desconectar()
 
-    # Obtener todos los departamentos
     def obtener_departamentos(self):
         self.conectar()
         self.cursor.execute("SELECT * FROM departamento")
@@ -66,48 +66,24 @@ class DAO:
         self.desconectar()
         return resultados
 
-    # Actualizar empleado
-    def actualizar_empleado(self, empleado):
+    def insertar_proyecto(self, proyecto):
         self.conectar()
-        sql = """
-        UPDATE empleado SET nombre=%s, direccion=%s, telefono=%s, email=%s, fecha_inicio=%s, salario=%s, id_departamento=%s
-        WHERE id_empleado=%s
-        """
-        datos = (
-            empleado.nombre,
-            empleado.direccion,
-            empleado.telefono,
-            empleado.email,
-            empleado.fecha_inicio,
-            empleado.salario,
-            empleado.id_departamento,
-            empleado.id_empleado
-        )
+        sql = """INSERT INTO proyecto (nombre, descripcion, fecha_inicio)
+                 VALUES (%s, %s, %s)"""
+        datos = (proyecto.get_nombre(), proyecto.get_descripcion(), proyecto.get_fecha_inicio())
         self.cursor.execute(sql, datos)
         self.conn.commit()
         self.desconectar()
 
-    # Eliminar empleado
-    def eliminar_empleado(self, id_empleado):
+    def obtener_proyectos(self):
         self.conectar()
-        sql = "DELETE FROM empleado WHERE id_empleado = %s"
-        self.cursor.execute(sql, (id_empleado,))
-        self.conn.commit()
+        self.cursor.execute("SELECT * FROM proyecto")
+        resultados = self.cursor.fetchall()
         self.desconectar()
+        return resultados
 
-    # Actualizar departamento
-    def actualizar_departamento(self, departamento):
+    def eliminar_proyecto(self, id_proyecto):
         self.conectar()
-        sql = "UPDATE departamento SET nombre=%s, gerente=%s WHERE id_departamento=%s"
-        datos = (departamento.nombre, departamento.gerente, departamento.id_departamento)
-        self.cursor.execute(sql, datos)
-        self.conn.commit()
-        self.desconectar()
-
-    # Eliminar departamento
-    def eliminar_departamento(self, id_departamento):
-        self.conectar()
-        sql = "DELETE FROM departamento WHERE id_departamento = %s"
-        self.cursor.execute(sql, (id_departamento,))
+        self.cursor.execute("DELETE FROM proyecto WHERE idproyecto = %s", (id_proyecto,))
         self.conn.commit()
         self.desconectar()

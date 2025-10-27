@@ -1,38 +1,21 @@
 class Proyecto:
-    def __init__(self,id_proyecto, nombre, descripcion, fecha_inicio):
-        self.__id_proyecto = id_proyecto
+    def __init__(self, idproyecto=None, nombre=None, descripcion=None, fecha_inicio=None):
+        self.__idproyecto = idproyecto
         self.__nombre = nombre
         self.__descripcion = descripcion
         self.__fecha_inicio = fecha_inicio
 
-    def get_id_proyecto(self):
-        return self.__id_proyecto
-    def set_id_proyecto(self,id_proyecto):
-        self.__id_proyecto = id_proyecto
+    def get_idproyecto(self): return self.__idproyecto
+    def set_idproyecto(self, idproyecto): self.__idproyecto = idproyecto
 
-    def get_nombre(self):
-        return self.__nombre
-    def set_nombre(self,nombre):
-        self.__nombre = nombre
+    def get_nombre(self): return self.__nombre
+    def set_nombre(self, nombre): self.__nombre = nombre
 
-    def get_descripcion(self):
-        return self.__descripcion
-    def set_descripcion(self,descripcion):
-        self.__descripcion = descripcion
-    
-    def get_fecha_inicio(self):
-        return self.__fecha_inicio
-    def set_fecha_inicio(self,fecha_inicio):
-        self.__fecha_inicio = fecha_inicio
+    def get_descripcion(self): return self.__descripcion
+    def set_descripcion(self, descripcion): self.__descripcion = descripcion
 
-    def crear(self):
-        print(f"Proyecto '{self.__nombre}' creado correctamente")
+    def get_fecha_inicio(self): return self.__fecha_inicio
+    def set_fecha_inicio(self, fecha_inicio): self.__fecha_inicio = fecha_inicio
 
-    def leer(self):
-        print(f"Informacion del proyecto: \n{self}")
-    
-    def actualizar(self,nombre, descripcion, fecha_inicio):
-        self.__nombre = nombre
-        self.__descripcion = descripcion
-        self.__fecha_inicio
-        print(f"Proyecto '{self.__id}' actualizado correctamente")
+    def __str__(self):
+        return f"Proyecto [ID={self.__idproyecto}, Nombre={self.__nombre}, Fecha de inicio={self.__fecha_inicio}]"
