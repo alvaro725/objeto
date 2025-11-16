@@ -1,8 +1,9 @@
-
+import re
 from DAO import DAO
 from Empleado import Empleado
 from Departamento import Departamento
 from Proyecto import Proyecto
+from decimal import Decimal
 from datetime import datetime
 
 dao = DAO()
@@ -18,6 +19,27 @@ def pedir_fecha_valida():
         except ValueError:
             print(" Formato incorrecto. Usa AAAA-MM-DD (ejemplo: 2025-10-24)")
 
+def pedir_float(mensaje):
+    """Pide un número decimal o deja en None si hay error."""
+    valor = input(mensaje).strip()
+    if valor == "":
+        return None
+    try:
+        return float(valor)
+    except ValueError:
+        print(" Valor inválido, se asignará 0 por defecto.")
+        return 0.0
+
+def pedir_int(mensaje):
+    """Pide un entero o deja en None si hay error."""
+    valor = input(mensaje).strip()
+    if valor == "":
+        return None
+    try:
+        return int(valor)
+    except ValueError:
+        print(" Valor inválido, se asignará 0 por defecto.")
+        return 0
 
 def registrar_empleado():
     nombre = input("Nombre: ")
@@ -25,8 +47,9 @@ def registrar_empleado():
     telefono = input("Teléfono: ")
     email = input("Email: ")
     fecha_inicio = pedir_fecha_valida()
-    salario = float(input("Salario: "))
-    id_depto = int(input("ID Departamento: "))
+    salario = pedir_float("Salario: ")
+    id_depto = pedir_int("ID Departamento: ")
+    
     e = Empleado(None, nombre, direccion, telefono, email, fecha_inicio, salario, id_depto)
     dao.insertar_empleado(e)
     print(" Empleado registrado correctamente.")
@@ -34,8 +57,15 @@ def registrar_empleado():
 def mostrar_empleados():
     empleados = dao.obtener_empleados()
     for e in empleados:
-        print(e)
-
+        datos_limpios = []
+        for valor in e:
+            if valor is None:
+                datos_limpios.append("")
+            elif isinstance(valor, Decimal):
+                datos_limpios.append(float(valor))
+            else:
+                datos_limpios.append(valor)
+        print(tuple(datos_limpios))
 
 def registrar_departamento():
     nombre = input("Nombre del departamento: ")
@@ -47,8 +77,15 @@ def registrar_departamento():
 def mostrar_departamentos():
     departamentos = dao.obtener_departamentos()
     for d in departamentos:
-        print(d)
-
+        datos_limpios = []
+        for valor in d:
+            if valor is None:
+                datos_limpios.append("")
+            elif isinstance(valor, Decimal):
+                datos_limpios.append(float(valor))
+            else:
+                datos_limpios.append(valor)
+        print(tuple(datos_limpios))
 
 def registrar_proyecto():
     nombre = input("Nombre del proyecto: ")
@@ -61,7 +98,15 @@ def registrar_proyecto():
 def mostrar_proyectos():
     proyectos = dao.obtener_proyectos()
     for p in proyectos:
-        print(p)
+        datos_limpios = []
+        for valor in p:
+            if valor is None:
+                datos_limpios.append("")
+            elif isinstance(valor, Decimal):
+                datos_limpios.append(float(valor))
+            else:
+                datos_limpios.append(valor)
+        print(tuple(datos_limpios))
 
 def menu():
     while True:
@@ -93,3 +138,4 @@ def menu():
             print("Opción inválida")
 
 menu()
+#prueba

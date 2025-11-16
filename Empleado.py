@@ -1,4 +1,3 @@
-# Empleado.py
 
 class Empleado:
     def __init__(self, idempleado=None, nombre=None, direccion=None, telefono=None, email=None, fecha_inicio=None, salario=None, id_departamento=None):

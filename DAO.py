@@ -3,6 +3,7 @@ from key import key
 from Empleado import Empleado
 from Departamento import Departamento
 from Proyecto import Proyecto
+from decimal import Decimal
 
 class DAO:
     def __init__(self):
@@ -84,3 +85,5 @@ class DAO:
         self.cursor.execute("DELETE FROM proyecto WHERE idproyecto = %s", (id_proyecto,))
         self.conn.commit()
         self.desconectar()
+
+
