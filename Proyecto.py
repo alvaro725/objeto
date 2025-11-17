@@ -18,4 +18,4 @@ class Proyecto:
     def set_fecha_inicio(self, fecha_inicio): self.__fecha_inicio = fecha_inicio
 
     def __str__(self):
-        return f"Proyecto [ID={self.__idproyecto}, Nombre={self.__nombre}, Fecha de inicio={self.__fecha_inicio}]"
+        return f"Proyecto [ID={self.__idproyecto}, Nombre={self.__nombre}, Inicio={self.__fecha_inicio}]"

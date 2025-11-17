@@ -1,6 +1,7 @@
-
 class Empleado:
-    def __init__(self, idempleado=None, nombre=None, direccion=None, telefono=None, email=None, fecha_inicio=None, salario=None, id_departamento=None):
+    def __init__(self, idempleado=None, nombre=None, direccion=None, telefono=None,
+                 email=None, fecha_inicio=None, salario=None, iddepartamento=None):
+
         self.__idempleado = idempleado
         self.__nombre = nombre
         self.__direccion = direccion
@@ -8,8 +9,9 @@ class Empleado:
         self.__email = email
         self.__fecha_inicio = fecha_inicio
         self.__salario = salario
-        self.__id_departamento = id_departamento
+        self.__iddepartamento = iddepartamento
 
+    # GETTERS Y SETTERS
     def get_idempleado(self): return self.__idempleado
     def set_idempleado(self, idempleado): self.__idempleado = idempleado
 
@@ -31,8 +33,9 @@ class Empleado:
     def get_salario(self): return self.__salario
     def set_salario(self, salario): self.__salario = salario
 
-    def get_id_departamento(self): return self.__id_departamento
-    def set_id_departamento(self, id_departamento): self.__id_departamento = id_departamento
+    def get_iddepartamento(self): return self.__iddepartamento
+    def set_iddepartamento(self, iddepartamento): self.__iddepartamento = iddepartamento
 
     def __str__(self):
-        return f"Empleado [ID={self.__idempleado}, Nombre={self.__nombre}, Email={self.__email}, Salario={self.__salario}]"
+        return (f"Empleado [ID={self.__idempleado}, Nombre={self.__nombre} , "
+                f"Depto={self.__iddepartamento}]")
